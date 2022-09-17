@@ -28,7 +28,7 @@ jobs:
             echo "This is an integration step" > /tmp/art-t;
             echo "Hello"
    
-      - store_artificats:
+      - store_artifacts:
           path: /tmp/art-1
           destination: artificat-file
 
