@@ -5,11 +5,11 @@ jobs:
       - checkout
 
       - run: 
-          command: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee /tmp/tflint-output.json         
+          command: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee tflint-output.json
           when: on_fail             # Even if the job fails, continue to the next stages
 
       - store_artifacts:
-          path: /tmp/tflint-output.json
+          path: tflint-output.json
           destination: tflint-artifact
           when: always
 
@@ -25,19 +25,14 @@ jobs:
       - checkout
       - run:
           command: |
-            echo "This is an integration step" > /tmp/art-t;
-            echo "Hello"
-   
-      - store_artifacts:
-          path: /tmp/art-t
-          destination: artificat-file
+            echo "This is an integration step"
+            exit 1
 
   prod:
     machine: true
     steps:
       - checkout
       - run: echo "This is a deploy step"
-
 
 workflows:
   version: 2
