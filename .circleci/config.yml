@@ -5,9 +5,7 @@ jobs:
       - checkout
 
       - run: 
-          command: |
-            docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee /tmp/tflint-output.json
-            cat tflint-output.json          
+          command: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint aws -f json | tee /tmp/tflint-output.json         
           when: on_fail             # Even if the job fails, continue to the next stages
 
       - store_artifacts:
