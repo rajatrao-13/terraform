@@ -10,6 +10,22 @@ jobs:
     runs-on: ubuntu-latest                    # similar to "image" in GitLab
     steps:
       - run: echo "This is a build step"
+  
+  terrascan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Terrascan
+        id: terrascan
+        uses: accurics/terrascan-action@v1
+        with:
+          iac_type: 'terraform'
+          iac_version: 'v14'
+          policy_type: 'aws'
+          only_warn: true
+          iac_dir: 'aws'
 
   test:
     runs-on: ubuntu-latest
